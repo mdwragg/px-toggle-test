@@ -1,0 +1,77 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<link rel="import" href="css/px-toggle-test-styles.html">
+
+<!--
+REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
+
+##### Usage
+
+    <px-toggle-test counter-value="1"></px-toggle-test>
+
+@element px-toggle-test
+@blurb REPLACE THIS TEXT WITH A COMPONENT DESCRIPTION
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-toggle-test">
+  <template>
+    <style include="px-toggle-test-styles"></style>
+    <style>
+      :host {
+        padding: 1px;
+      }
+    </style>
+    <!-- HTML and CSS get the job done, no JavaScript required -->
+    <input id$="{{randomID}}" class="toggle__input" type="checkbox">
+    <label for$="{{randomID}}" class="toggle__label"></label>  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-toggle-test',
+
+    properties: {
+      /**
+      * This property keeps track of the number of clicks.
+      *
+      * @property counterValue
+      */
+      randomID: {
+        type: Number,
+        value: function(){
+          var S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+          };
+          return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+        }
+      }
+
+    },
+
+    /**
+    * Handles click on the element defined in 'on-click' on the template.
+    *
+    * @method handleClick
+    */
+    handleClick: function(event, detail, sender) {
+      this.increment();
+    },
+
+    /**
+    * Increments the counter
+    *
+    * @method increment
+    */
+    increment: function() {
+      this.counterValue++;
+    }
+  });
+</script>
